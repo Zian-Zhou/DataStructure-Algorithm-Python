@@ -41,3 +41,29 @@ def twoSum(nums.target):
 			return [d[target-num],i]
 		else:
 			d[num]=i 
+
+
+#对撞指针
+def twosum(nums,target):
+    nums.sort()
+    left = 0
+    right = len(nums)-1
+    res = []
+    
+    while left<right:
+        ident = nums[left]+nums[right]
+        if ident==target:
+            res.append([nums[left],nums[right]])
+            left+=1
+            right-=1
+            #去重
+            while left<right and nums[left]==nums[left-1]:
+                left+=1
+            while left<right and nums[right]==nums[right+1]:
+                right-=1
+        elif ident<target:
+            left+=1
+        else:#ident>target
+            right-=1
+    
+    return res
